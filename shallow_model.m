@@ -1,8 +1,8 @@
 function [adj_temp,seg_temp,fs,adj_time] = shallow_model(Time,temp,zz,K,Gz)
-% For calculating seafloor/ocean bottom temperature derived temperature 
-% as they propagate into seafloor sediment to specifc depths.
+% This matlab function can calculate a temperature record at a specific seafloor 
+% sediment depth based on seafloor/ocean bottom temperature record.
 %
-% This m-file uses FFT to deconstruct the tempearture and the equation from
+% This m-file uses FFT to deconstruct the temperature record and the equation from
 % Hamamato et al, 2005 to reconstruct the temperature profile.
 %
 % Inputs:
@@ -12,35 +12,35 @@ function [adj_temp,seg_temp,fs,adj_time] = shallow_model(Time,temp,zz,K,Gz)
 %
 %	temp: An array of seafloor temperatures (degree C). Matrix should be the same size as Time
 %	zz: sediment depth (meters) that the temperature will be propagated to
-%	K: Sediment thermal diffusivity (m^(2) s^(-1))
-%	Gz: Sediment geothermal gradient (degrees C/m)
+%	K: Sediment thermal diffusivity (m^{2} s^{-1})
+%	Gz: Sediment geothermal gradient (degree C m^{-1})
 %
 % Outputs: 
 % 
 %	adj_temp: Estimated temperatures at depth zz
-%	seg_temp: Interpolated seafloor temperature to match adj_temp size
+%	seg_temp: Interpolated seafloor temperature record to match adj_temp size
 %	fs: sample frequency (Hz)
 %	adj_time: Interpolated matrix of time to match adj_temp size
 %
-%   Example of usage: [adj_temp,adj_temp,seg_temp,fs,adj_time] = shallow_model(Time,temp,0.75,4e-7,0.105);
+%   Example of usage: [adj_temp,seg_temp,fs,adj_time] = shallow_model(Time,temp,0.75,4e-7,0.105);
 % 
 % Marie S. Salmi - 2018
 
 if nargin<1
-    help shallow_model
-    adj_temp= [];
-    seg_temp = [];
-    fs = [];
-    adj_time = [];
-    return
+	help shallow_model
+	adj_temp= [];
+    	seg_temp = [];
+    	fs = [];
+    	adj_time = [];
+    	return
 end
 
 if length(Time) ~= length(temp)
 	disp(' The time and temperture matrices are not the same length')
-    adj_temp= [];
-    seg_temp = [];
-    fs = [];
-    adj_time = [];
+    	adj_temp= [];
+    	seg_temp = [];
+    	fs = [];
+	adj_time = [];
 	return
 end
 
