@@ -2,8 +2,9 @@ function [adj_temp,seg_temp,fs,adj_time] = shallow_model(Time,temp,zz,K,Gz)
 % This matlab function can calculate a temperature record at a specific seafloor 
 % sediment depth based on seafloor/ocean bottom temperature record.
 %
-% This m-file uses FFT to deconstruct the temperature record and the equation from
-% Hamamato et al, 2005 to reconstruct the temperature profile.
+% This m-file uses FFT to translate the temperature record into frequencies 
+% and then uses the equation from Hamamato et al, 2005 to reconstruct the 
+% temperature profile.
 %
 % Inputs:
 %	
@@ -44,7 +45,7 @@ if length(Time) ~= length(temp)
 	return
 end
 
-%Sample matrix length
+% Sample matrix length
 L = length(Time);
 a=nextpow2(L);
 
@@ -55,32 +56,32 @@ else
     N=2^(a);
 end
 
-%load and interpolate the data
+% load and interpolate the data
 min_time=min(Time);
 max_time=max(Time);
 
 tp=linspace(min_time,max_time,N)-min_time;
 Temp=interp1(Time-min_time,temp,tp');
 
-%variables used in the calculation. Includes Depth and K. 
-seg = 10;                 %Used to reduce the dataset to speed up the processing
-N2  = (N)/2;                                  %Sample cutoff
-fs  = (1/(tp(1,2)-tp(1,1)))*(1/(60*60*24));    %sample frequency in seconds
-Tz  = Temp-mean(Temp);
+% Variables used in the frequency space section of the calculation.
+seg = 1;                 			% Used to reduce the dataset to speed up the processing, if needed
+N2  = (N)/2;                                    % Sample cutoff
+fs  = (1/(tp(1,2)-tp(1,1)))*(1/(60*60*24));     % sample frequency in seconds
+Tz  = Temp-mean(Temp);				% Zero the temperature record around the mean temperature
 
-%Preallocate matrices for calculations
+% Preallocate matrices for calculations
 t=1;
 rho = zeros(1,N2);
 b = zeros(1,N2);
 complex = zeros(1,N2);
 z = zeros(1,N2);
 
-%Run the FFT and separate the result
+% Run the FFT and separate the result
 fast=fft(Tz,N);
 realz=real(fast);
 img=imag(fast);
 
-%Actual calculations    
+% Actual calculations    
 %h= waitbar(0, 'Calculating....');
 while t <= N
     
