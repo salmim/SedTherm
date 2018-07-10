@@ -1,6 +1,6 @@
 function [adj_temp,seg_temp,fs,adj_time] = shallow_model(Time,temp,zz,K,Gz)
-% This matlab function can calculate a temperature record at a specific seafloor 
-% sediment depth based on seafloor/ocean bottom temperature record.
+% This matlab function can calculate a temperature record at a specific sediment 
+% depth below the seafloor based on seafloor/ocean bottom temperature record.
 %
 % This m-file uses FFT to translate the temperature record into frequencies 
 % and then uses the equation from Hamamato et al, 2005 to reconstruct the 
