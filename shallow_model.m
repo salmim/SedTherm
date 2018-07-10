@@ -48,9 +48,9 @@ end
 L = length(Time);
 a=nextpow2(L);
 
-% Reduce the data size if the input is extremely large
+% Cap the data size if the input is extremely large
 if L > 50000
-    N=2^(a-2);
+    N=2^(15);
 else
     N=2^(a);
 end
