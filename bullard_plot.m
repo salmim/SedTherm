@@ -1,10 +1,10 @@
 function [HF,r2,TG]= bullard_plot(temp,k,depth)
 % This m-file calculates the heat flow using the Bullard plot method from
-% (co-registered) temperature and thermal conductivity measurements at depth
-% intervals into the sediment 
+% (co-registered) temperature and thermal conductivity measurements at known
+% depths into the sediment 
 % 
 % Inputs-
-% temp: Temperature measurements with depth (Degree C)
+% temp: Temperature measurements (Degree C)
 % k: Thermal Conductivity (W m^{-1}K^{-1})
 % depth: depth of the temperature/thermal conductivity measurements (meters)
 %
@@ -56,8 +56,7 @@ tot = sum((rest - mean(rest)).^2);
 r2 = 1-(res/tot);           
 
 % calculate the heat flow
-Slope1 = p(1);
-HF = 1/Slope1;
+HF = 1/p(1);
 
 % calculate the thermal gradient
 [q,~] = polyfit(temp,depth(2:end),1);
