@@ -1,19 +1,21 @@
 function [HF,r2,TG]= bullard_plot(temp,k,depth)
-% This m-file calculates the heat flow using the Bullard plot method from
-% (co-registered) temperature and thermal conductivity measurements at known
-% depths into the sediment 
+% This matlab function calculates the heat flow using the Bullard plot method from
+% from (co-registered) temperature and thermal conductivity measurements at known
+% depths into the sediment.
+%
+%    NOTE: This function only calculates heat flow on ONE profile at a time
 % 
 % Inputs-
-% temp: Temperature measurements (Degree C)
-% k: Thermal Conductivity (W m^{-1}K^{-1})
-% depth: depth of the temperature/thermal conductivity measurements (meters)
+% 	temp: Temperature measurements (Degree C)
+% 	k: Thermal Conductivity (W m^{-1}K^{-1})
+% 	depth: depth of the temperature/thermal conductivity measurements (meters)
 %
 % temp, k, and depth should be the same size
 %
 % Outputs-
-% HF: Heat Flow (W m^(-2))
-% r2: Coefficient of determination or R^2
-% TG: Thermal Gradient (degree C meter^(-1))
+% 	HF: Heat Flow (W m^(-2))
+% 	r2: Coefficient of determination or R^2
+% 	TG: Thermal Gradient (degree C meter^(-1))
 %
 
 % check that the data is in the correct format
